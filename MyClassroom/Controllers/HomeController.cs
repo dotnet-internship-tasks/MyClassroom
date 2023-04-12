@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MyClassroom.Application.Services;
 using MyClassroom.Application.ViewModels;
 using System.Diagnostics;
 
@@ -7,10 +9,12 @@ namespace MyClassroom.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITokenService _tokenService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITokenService tokenService)
         {
             _logger = logger;
+            _tokenService = tokenService;
         }
 
         public IActionResult Index()
@@ -18,8 +22,16 @@ namespace MyClassroom.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Authorize(Roles = "user")]
+        public async Task<IActionResult> Privacy()
         {
+            var session_id = HttpContext?.User?.FindFirst("session_id")?.Value;
+            Guid id;
+            if (Guid.TryParse(session_id, out id))
+            {
+                var token = await _tokenService.GetTokenById(Guid.Parse(session_id));
+                return View(token);
+            }
             return View();
         }
 

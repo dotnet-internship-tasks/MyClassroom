@@ -1,6 +1,40 @@
-﻿@{
+﻿@model MyClassroom.Core.Models.Token
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.AccessToken)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.AccessToken)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.RefreshToken)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.RefreshToken)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.ExpireDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.ExpireDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.RefreshTokenExpireDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.RefreshTokenExpireDate)
+    </dd>
+</dl>
+
 
 <p>Use this page to detail your site's privacy policy.</p>
