@@ -23,13 +23,13 @@ namespace MyClassroom.MVC.Auth
             context.RunClaimActions(user);
 
             var session_id = Guid.Parse(context?.Identity?.Claims?.SingleOrDefault(c => c.Type == "session_id")?.Value ?? "");
-            var expireDate = DateTime.UtcNow.AddSeconds(int.Parse(context.TokenResponse.ExpiresIn!));
+            var expireDate = DateTime.UtcNow.AddSeconds(int.Parse(context?.TokenResponse.ExpiresIn!));
             var refreshTokenExpireDate = DateTime.UtcNow.AddSeconds(GithubDefaults.RefreshTokenExpireIn);
             await tokenService!.AddToken(new Token()
             {
                 Id = session_id,
-                AccessToken = context.AccessToken!,
-                RefreshToken = context.RefreshToken!,
+                AccessToken = context?.AccessToken!,
+                RefreshToken = context?.RefreshToken!,
                 ExpireDate = expireDate,
                 RefreshTokenExpireDate = refreshTokenExpireDate
             });
