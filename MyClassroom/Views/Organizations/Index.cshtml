@@ -1,0 +1,12 @@
+﻿@using Octokit
+@model IReadOnlyList<Organization>
+
+@{
+    ViewData["Title"] = "Organizations";
+}
+
+<ul class="list-group">
+    @foreach (var organization in Model) {
+        <li class="list-group-item">@organization.Login</li>
+    }
+</ul>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.Options;
 using MyClassroom.Application.Services;
+using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -15,6 +16,10 @@ namespace MyClassroom.MVC.Github
             TokenEndpoint = "https://github.com/login/oauth/access_token";
             CallbackPath = new PathString("/signin-github");
             UserInformationEndpoint = "https://api.github.com/user";
+            Scope.Add("repo");
+            Scope.Add("project");
+            Scope.Add("user");
+            Scope.Add("read:org");
         }
     }
 }
