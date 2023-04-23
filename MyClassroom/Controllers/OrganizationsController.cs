@@ -31,7 +31,7 @@ namespace MyClassroom.MVC.Controllers
             var session_id = HttpContext?.User?.FindFirst("session_id")?.Value;
             if (Guid.TryParse(session_id, out Guid id))
             {
-                var token = await _tokenService.GetTokenById(Guid.Parse(session_id));
+                var token = await _tokenService.GetTokenById(id);
                 var productHeader = _githubProductHeaderOptions.ProductHeader;
                 var client = _gitHubClientService.GetClient(token!.AccessToken, productHeader);
                 var organizations = await _organizationService.GetUserOrganisationsAsync(client);
