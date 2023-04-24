@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MyClassroom.Core.Models.Classroom>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<ul class="list-group">
+    @foreach (var classroom in Model)
+    {
+        <li class="list-group-item">@classroom.Name</li>
+    }
+</ul>
