@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using MyClassroom.Application.Services;
 using MyClassroom.Infrastructure.Data;
+using MyClassroom.Infrastructure.Services;
 using MyClassroom.MVC.Auth;
 using MyClassroom.MVC.Github;
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+builder.Services.Configure<GithubProductHeaderOptions>(builder.Configuration.GetSection(GithubProductHeaderOptions.Name));
 builder.Services.Configure<GithubAppOptions>(builder.Configuration.GetSection(GithubAppOptions.Name));
 builder.Services.AddScoped<IClaimsTransformation, RoleClaimsTransformation>();
 builder.Services.AddAuthentication("cookie")
@@ -41,6 +43,8 @@ builder.Services.AddDbContext<MyClassroomContext>(options =>
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IGitHubClientService, GitHubClientService>();
+builder.Services.AddTransient<IOrganizationService, OrganizationService>();
 
 var app = builder.Build();
 

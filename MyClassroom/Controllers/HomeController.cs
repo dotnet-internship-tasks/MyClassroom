@@ -26,10 +26,9 @@ namespace MyClassroom.Controllers
         public async Task<IActionResult> Privacy()
         {
             var session_id = HttpContext?.User?.FindFirst("session_id")?.Value;
-            Guid id;
-            if (Guid.TryParse(session_id, out id))
+            if (Guid.TryParse(session_id, out Guid id))
             {
-                var token = await _tokenService.GetTokenById(Guid.Parse(session_id));
+                var token = await _tokenService.GetTokenById(id);
                 return View(token);
             }
             return View();
