@@ -19,14 +19,14 @@ namespace MyClassroom.Infrastructure.Services
         public async Task<IEnumerable<SelectListItem>> GetSelectListOrganizations(GitHubClient client)
         {
             var organizations = await GetUserOrganisationsAsync(client);
-            var roles = organizations                        
+            var selectList = organizations                        
                         .Select(x =>
                                 new SelectListItem
                                 {
                                     Value = x.Id.ToString(),
                                     Text = x.Login
                                 });
-            return new SelectList(roles, "Value", "Text");
+            return new SelectList(selectList, "Value", "Text");
         }
     }
 }

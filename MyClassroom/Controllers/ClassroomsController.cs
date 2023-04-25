@@ -59,8 +59,12 @@ namespace MyClassroom.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(NewClassroomViewModel viewModel)
         {
-            var newClassroom = await _classroomService.CreateClassroomAsync(viewModel);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                var newClassroom = await _classroomService.CreateClassroomAsync(viewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }        
     }
 }

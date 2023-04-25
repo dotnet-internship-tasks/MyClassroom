@@ -14,6 +14,7 @@
         {
             @Html.HiddenFor(model => model.Classroom.Id)
             @Html.HiddenFor(model => model.Classroom.OrganizationId)
+            @Html.HiddenFor(model => model.OrganizationsViewModel.Organizations)
             <div class="form-group">
                 @Html.LabelFor(model => model.Classroom.Name, new { @class="control-label" })
                 @Html.TextBoxFor(model => model.Classroom.Name, new { @class="form-control" })
