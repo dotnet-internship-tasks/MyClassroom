@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyClassroom.Infrastructure.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyClassroom.MVC.Migrations
 {
     [DbContext(typeof(MyClassroomContext))]
-    partial class MyClassroomContextModelSnapshot : ModelSnapshot
+    [Migration("20230424153826_AddClassroom")]
+    partial class AddClassroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +23,6 @@ namespace MyClassroom.MVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("MyClassroom.Core.Models.Assignment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClassroomId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TemplateId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
-
-                    b.ToTable("Assignments");
-                });
 
             modelBuilder.Entity("MyClassroom.Core.Models.Classroom", b =>
                 {
@@ -145,17 +122,6 @@ namespace MyClassroom.MVC.Migrations
                     b.ToTable("RoleUser");
                 });
 
-            modelBuilder.Entity("MyClassroom.Core.Models.Assignment", b =>
-                {
-                    b.HasOne("MyClassroom.Core.Models.Classroom", "Classroom")
-                        .WithMany("Assignments")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Classroom");
-                });
-
             modelBuilder.Entity("RoleUser", b =>
                 {
                     b.HasOne("MyClassroom.Core.Models.Role", null)
@@ -169,11 +135,6 @@ namespace MyClassroom.MVC.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MyClassroom.Core.Models.Classroom", b =>
-                {
-                    b.Navigation("Assignments");
                 });
 #pragma warning restore 612, 618
         }

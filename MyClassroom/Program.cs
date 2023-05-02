@@ -45,6 +45,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IGitHubClientService, GitHubClientService>();
 builder.Services.AddTransient<IOrganizationService, OrganizationService>();
+builder.Services.AddTransient<IClassroomService, ClassroomService>();
+builder.Services.AddTransient<IAssignmentService, AssignmentService>();
+builder.Services.AddTransient<IRepositoryService,  RepositoryService>();
 
 var app = builder.Build();
 
