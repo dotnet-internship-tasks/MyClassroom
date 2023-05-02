@@ -11,11 +11,6 @@ namespace MyClassroom.Infrastructure.Services
             return await client.Organization.GetAllForCurrent();
         }
 
-        public async Task<Organization> GetUserOrganisationAsync(GitHubClient client, string name)
-        {
-            return await client.Organization.Get(name);
-        }
-
         public async Task<IEnumerable<SelectListItem>> GetSelectListOrganizations(GitHubClient client)
         {
             var organizations = await GetUserOrganisationsAsync(client);

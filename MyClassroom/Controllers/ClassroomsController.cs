@@ -44,11 +44,13 @@ namespace MyClassroom.MVC.Controllers
                 var token = await _tokenService.GetTokenById(id);
                 var productHeader = _githubProductHeaderOptions.ProductHeader;
                 var client = _gitHubClientService.GetClient(token!.AccessToken, productHeader);
+                var organizations = await _organizationService.GetSelectListOrganizations(client);
+                ViewBag.OrganizationCount = organizations.Count();
                 var newClassroom = new NewClassroomViewModel()
                 {
                     OrganizationsViewModel = new OrganizationsViewModel()
                     {
-                        Organizations = await _organizationService.GetSelectListOrganizations(client)
+                        Organizations = organizations
                     }
                 };
                 return View(newClassroom);

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MyClassroom.Core.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@ViewBag.ClassroomName</h1>
+<h3>Assignments Index</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { classroomId = @ViewBag.ClassroomId })
+</p>
+
+<div class="row">
+    <div class="col-3">
+        <ul class="list-group">
+            @foreach (var assignment in Model)
+            {
+                <li class="list-group-item">@assignment.Title</li>
+            }
+        </ul>
+    </div>
+</div>

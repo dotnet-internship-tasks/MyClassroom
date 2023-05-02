@@ -20,6 +20,12 @@ namespace MyClassroom.Infrastructure.Services
             return await _context.Classrooms.ToListAsync();
         }
 
+        public async Task<Classroom> GetClassroomAsync(int id)
+        {
+            var classroom = await _context.Classrooms.FindAsync(id);
+            return classroom ?? throw new Exception();
+        }
+
         public async Task<Classroom> CreateClassroomAsync(NewClassroomViewModel viewModel)
         {
             viewModel.Classroom.OrganizationId = viewModel.OrganizationsViewModel.SelectedOrganizationId;
@@ -27,6 +33,5 @@ namespace MyClassroom.Infrastructure.Services
             await _context.SaveChangesAsync();
             return viewModel.Classroom;
         }
-
     }
 }

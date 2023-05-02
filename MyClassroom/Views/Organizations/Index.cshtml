@@ -5,8 +5,21 @@
     ViewData["Title"] = "Organizations";
 }
 
-<ul class="list-group">
-    @foreach (var organization in Model) {
-        <li class="list-group-item">@organization.Login</li>
+<h1>Organizations</h1>
+<h3>Index</h3>
+
+<div class="row">
+    @foreach (var organization in Model)
+    {
+        <div class="col-3">
+            <div class="p-2">
+                <div class="card">
+                    <img src="@organization.AvatarUrl" class="card-img-top" alt="organization-avatar">
+                    <div class="card-body">
+                        <h5 class="card-title">@organization.Login</h5>
+                    </div>
+                </div>
+            </div>            
+        </div>
     }
-</ul>
+</div>
